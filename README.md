@@ -1,3 +1,3 @@
-# Time Stamp Microservice
+# microURL
 
-This is a tiny micro-service that returns the time it received a request.
+This is a tiny micro-service that generates, stores, and redirects urls.
