@@ -1,10 +1,13 @@
 import express from 'express';
 import { MongoClient } from 'mongodb';
+import path from 'path';
+import cors from 'cors';
 
 const publicURL = 'http://poop.com/';
 const mongoURL = 'mongodb://localhost:27017/microURL';
 const LOCAL_PORT = 3000;
 const app = express();
+
 
 const findUrl = (db, url, cb) => (
   db.collection('urls').find({ index: parseInt(url, 10) }).toArray()
@@ -38,8 +41,9 @@ const insertUrl = (db, url, cb) => {
   });
 };
 
+
 app.get('/', (req, res) => {
-  res.send('MicroUrl Service');
+  res.sendFile(path.join(__dirname, '../static/index.html'));
 });
 
 app.get('/url/:tinyUrl', (req, res) => {
@@ -62,6 +66,7 @@ app.get('/url/:tinyUrl', (req, res) => {
 
 app.get('/new/:url', (req, res) => {
   MongoClient.connect(mongoURL, (err, db) => {
+    console.log('new request');
     if (err === null) {
       insertUrl(db, req.params.url, (result) => {
         const { number, originalUrl } = result.ops[0];
@@ -77,6 +82,8 @@ app.get('/new/:url', (req, res) => {
     }
   });
 });
+
+app.options('*', cors());
 
 app.get('/size', (req, res) => {
   MongoClient.connect(mongoURL, (err, db) => {

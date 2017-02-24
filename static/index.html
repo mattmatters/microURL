@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>MicroUrl</title>
+    <meta name="description" content"Serves microUrls">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="index follow" />
+    <!-- Browser Content -->
+    <meta name="theme-color" content="black">
+
+    <link rel="icon" sizes="192x192" href="icon.png">
+    <link rel="apple-touch-icon" href="ios-icon.png">
+    <meta name="msapplication-square310x310logo" content="icon_largetile.png">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Bungee+Inline|Roboto|Open+Sans|VT323" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="header-brand text-center">MicroURL</h1>
+      <div class="row">
+        <div class="col-xs-6">
+          <input id="long-url-input" class="input-url" placeholder="Put url here"></input>
+          <button onClick="getNewURL($('#long-url-input').val())">
+            Go
+          </button>
+        </div>
+        <div class="col-xs-6">
+          <p id="short-url-output" class="output-url">
+            New URL appears here!
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    function getNewURL(longUrl) {
+      var pageUrl = "http://localhost:3000/new/";
+      var requestUrl = pageUrl + longUrl;
+
+      $.get(requestUrl, function(data) {
+        $("#short-url-output").text(data.shortendUrl);
+      });
+    }
+
+    // listen for enter
+    $("#long-url-input").on('keyup', function (e) {
+      if (e.keyCode == 13) {
+        getNewURL($('#long-url-input').val());
+      }
+    });
+  </script>
+</html>
