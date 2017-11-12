@@ -1,0 +1,10 @@
+image: node
+services:
+  - mongo
+
+test:
+  script:
+    - npm install
+    - npm run build
+    - npm run lint
+    - npm run test
