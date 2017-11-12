@@ -2,41 +2,70 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>MicroUrl</title>
-    <meta name="description" content"Serves microUrls">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kinda Small URL</title>
+    <meta name="description" content"Serves microUrls" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="index follow" />
-    <!-- Browser Content -->
-    <meta name="theme-color" content="black">
-
+    <meta name="theme-color" content="black" />
     <link rel="icon" sizes="192x192" href="icon.png">
     <link rel="apple-touch-icon" href="ios-icon.png">
     <meta name="msapplication-square310x310logo" content="icon_largetile.png">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Bungee+Inline|Roboto|Open+Sans|VT323" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+     @import url('https://fonts.googleapis.com/css?family=Lato|Lemon');
+     .header {
+         margin: 0;
+         padding-top: 1.3em;
+         margin-bottom: .6em;
+         text-align: center;
+         font-size: 6em;
+         font-family: 'Lemon', cursive;
+     }
+     .sub-header {
+         margin-bottom: .8em;
+     }
+     body {
+         text-align: center;
+         font-family: 'Lato', sans-serif;
+     }
+     .input {
+         width: 60%;
+         height: 4em;
+         padding-bottom: .5em;
+         text-align: center;
+         margin: .5em auto;
+     }
+     .input input {
+         width: 80%;
+         height: 100%;
+     }
+     .input button {
+         width: 15%;
+         height: 100%;
+     }
+     .output-url {
+         margin-top: 1.5em;
+     }
+     @media screen and (max-width: 750px) {
+         .input {
+             width: 75%;
+         }
+     }
+    </style>
   </head>
   <body>
-    <div class="container">
-      <h1 class="header-brand text-center">MicroURL</h1>
-      <div class="row">
-        <div class="col-xs-6">
+      <h1 class="header">Kinda Small Url</h1>
+      <div class="input">
           <input id="long-url-input" class="input-url" placeholder="Put url here"></input>
           <button onClick="getNewURL($('#long-url-input').val())">
-            Go
+              Go
           </button>
-        </div>
-        <div class="col-xs-6">
-          <p id="short-url-output" class="output-url">
-            New URL appears here!
-          </p>
-        </div>
       </div>
-    </div>
+      <h4 id="short-url-output" class="output-url">Convenience at its finest.</h4>
   </body>
   <script>
     function getNewURL(longUrl) {
