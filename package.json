@@ -49,6 +49,7 @@
   "scripts": {
     "start": "npm run build && node lib/app.js",
     "build": "npm run lint && babel src -d lib",
+    "postinstall": "npm run build",
     "lint": "eslint src/*.js",
     "test": "mocha --compilers babel-core/register ./test/*test.js",
     "test:watch": "npm test -- -w"
