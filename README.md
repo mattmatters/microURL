@@ -1,3 +1,6 @@
-# microURL
+# Kinda Small Url
 
-This is a tiny micro-service that generates, stores, and redirects urls.
+Totally original service of generating a url that is sort of small.
+
+Go tell your neighbors!
+
