@@ -6,7 +6,7 @@ import process from 'process';
 
 const publicURL = 'http://kindasmallurl.fun/';
 const mongoURL = process.env.MONGO_URI ? process.env.MONGO_URI : 'mongodb://localhost:27017/kindasmallurl';
-const LOCAL_PORT = 3000;
+const PORT = process.env.PORT ? process.env.PORT : 3000;
 const app = express();
 
 const findUrl = (db, url, cb) => (
@@ -107,6 +107,6 @@ app.get('/all', (req, res) => {
   });
 });
 
-app.listen(LOCAL_PORT, () => {
-  console.log(`app is listening on port ${LOCAL_PORT}`);
+app.listen(PORT, () => {
+  console.log(`app is listening on port ${PORT}`);
 });
