@@ -5,7 +5,7 @@ import cors from 'cors';
 import process from 'process';
 
 const publicURL = 'http://kindasmallurl.fun/';
-const mongoURL = process.env.MONGO_URI ? `${process.env.MONGO_URI}/kindasmallurl` : 'mongodb://localhost:27017/kindasmallurl';
+const mongoURL = process.env.MONGO_URI ? process.env.MONGO_URI : 'mongodb://localhost:27017/kindasmallurl';
 const PORT = process.env.PORT ? process.env.PORT : 3000;
 const app = express();
 
