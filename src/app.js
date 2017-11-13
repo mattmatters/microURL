@@ -5,7 +5,7 @@ import cors from 'cors';
 import process from 'process';
 
 const publicURL = 'http://kindasmallurl.fun/';
-const mongoURL = process.env.MONGO_URI ? process.env.MONGODB_URI : 'mongodb://localhost:27017/kindasmallurl';
+const mongoURL = process.env.MONGODB_URI ? process.env.MONGODB_URI : 'mongodb://localhost:27017/kindasmallurl';
 const PORT = process.env.PORT ? process.env.PORT : 3000;
 const app = express();
 
@@ -48,7 +48,7 @@ app.get('/', (req, res) => {
 
 app.get('/url/:tinyUrl', (req, res) => {
   MongoClient.connect(mongoURL, (err, db) => {
-    if (err === null) {
+    if (!err) {
       findUrl(db, req.params.tinyUrl, (url) => {
         if (url) {
           res.redirect(`http://${url.originalUrl}`);
@@ -66,7 +66,7 @@ app.get('/url/:tinyUrl', (req, res) => {
 
 app.get('/new/:url', (req, res) => {
   MongoClient.connect(mongoURL, (err, db) => {
-    if (err === null) {
+    if (!err) {
       insertUrl(db, req.params.url, (result) => {
         const { number, originalUrl } = result.ops[0];
         res.send({
@@ -77,7 +77,6 @@ app.get('/new/:url', (req, res) => {
       });
     } else {
       res.send(err);
-      db.close();
     }
   });
 });
@@ -86,24 +85,27 @@ app.options('*', cors());
 
 app.get('/size', (req, res) => {
   MongoClient.connect(mongoURL, (err, db) => {
-    if (err === null) {
+    if (!err) {
       countEntries(db, (result) => {
         res.send(result);
       });
       db.close();
     } else {
       res.send(err);
-      db.close();
     }
   });
 });
 
 app.get('/all', (req, res) => {
   MongoClient.connect(mongoURL, (err, db) => {
-    findEntries(db, (entries) => {
-      res.send(entries);
-      db.close();
-    });
+    if (!err) {
+      findEntries(db, (entries) => {
+        res.send(entries);
+        db.close();
+      });
+    } else {
+      res.send(err);
+    }
   });
 });
 
