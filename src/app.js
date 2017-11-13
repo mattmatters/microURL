@@ -5,7 +5,7 @@ import cors from 'cors';
 import process from 'process';
 
 const publicURL = 'http://kindasmallurl.fun/';
-const mongoURL = process.env.MONGO_URI ? process.env.MONGO_URI : 'mongodb://localhost:27017/kindasmallurl';
+const mongoURL = process.env.MONGO_URI ? `${process.env.MONGO_URI}/kindasmallurl` : 'mongodb://localhost:27017/kindasmallurl';
 const PORT = process.env.PORT ? process.env.PORT : 3000;
 const app = express();
 
@@ -66,6 +66,8 @@ app.get('/url/:tinyUrl', (req, res) => {
 
 app.get('/new/:url', (req, res) => {
   MongoClient.connect(mongoURL, (err, db) => {
+    console.log(err);
+    console.log(db);
     if (err === null) {
       insertUrl(db, req.params.url, (result) => {
         const { number, originalUrl } = result.ops[0];
