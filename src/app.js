@@ -10,7 +10,7 @@ const PORT = process.env.PORT ? process.env.PORT : 3000;
 const app = express();
 
 const randomString = (len, bits = 36) => {
-  let outStr = "";
+  let outStr = '';
   let newStr;
 
   while (outStr.length < len) {
@@ -27,13 +27,6 @@ const findUrl = (db, url, cb) => (
     })
 );
 
-const countEntries = (db, cb) => {
-  db.collection('urls').find().count()
-    .then((count) => {
-      cb({ count });
-    });
-};
-
 const findEntries = (db, cb) => {
   db.collection('urls').find().toArray()
     .then((items) => {
@@ -42,13 +35,11 @@ const findEntries = (db, cb) => {
 };
 
 const insertUrl = (db, url, cb) => {
-  countEntries(db, (response) => {
-    db.collection('urls').insertMany([{
-      number: randomString(400),
-      originalUrl: url,
-    }], (err, result) => {
-      cb(result);
-    });
+  db.collection('urls').insertMany([{
+    number: randomString(400),
+    originalUrl: url,
+  }], (err, result) => {
+    cb(result);
   });
 };
 
@@ -93,19 +84,6 @@ app.get('/new/:url', (req, res) => {
 });
 
 app.options('*', cors());
-
-app.get('/size', (req, res) => {
-  MongoClient.connect(mongoURL, (err, db) => {
-    if (!err) {
-      countEntries(db, (result) => {
-        res.send(result);
-      });
-      db.close();
-    } else {
-      res.send(err);
-    }
-  });
-});
 
 app.get('/all', (req, res) => {
   MongoClient.connect(mongoURL, (err, db) => {
