@@ -36,7 +36,7 @@ const findEntries = (db, cb) => {
 
 const insertUrl = (db, url, cb) => {
   db.collection('urls').insertMany([{
-    number: randomString(400),
+    number: randomString(80),
     originalUrl: url,
   }], (err, result) => {
     cb(result);
