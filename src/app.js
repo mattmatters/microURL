@@ -9,6 +9,17 @@ const mongoURL = process.env.MONGODB_URI ? process.env.MONGODB_URI : 'mongodb://
 const PORT = process.env.PORT ? process.env.PORT : 3000;
 const app = express();
 
+const randomString = (len, bits = 36) => {
+  let outStr = "";
+  let newStr;
+
+  while (outStr.length < len) {
+    newStr = Math.random().toString(bits).slice(2);
+    outStr += newStr.slice(0, Math.min(newStr.length, (len - outStr.length)));
+  }
+  return outStr;
+};
+
 const findUrl = (db, url, cb) => (
   db.collection('urls').find({ number: parseInt(url, 10) }).toArray()
     .then((item) => {
@@ -33,7 +44,7 @@ const findEntries = (db, cb) => {
 const insertUrl = (db, url, cb) => {
   countEntries(db, (response) => {
     db.collection('urls').insertMany([{
-      number: response.count + 1,
+      number: randomString(400),
       originalUrl: url,
     }], (err, result) => {
       cb(result);
