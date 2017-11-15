@@ -80,7 +80,8 @@
     // listen for enter
     $("#long-url-input").on('keyup', function (e) {
       if (e.keyCode == 13) {
-        getNewURL($('#long-url-input').val());
+        var url = encodeURIComponent($('#long-url-input').val());
+        getNewURL(url);
       }
     });
   </script>
