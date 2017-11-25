@@ -65,24 +65,27 @@
               Go
           </button>
       </div>
-      <h4 id="short-url-output" class="output-url">Convenience at its finest.</h4>
+      <a id="short-url-output" class="output-url"></a>
+      <h4 id="status">Convenience at its finest.</h4>
   </body>
   <script>
-    function getNewURL(longUrl) {
-      var pageUrl = "/new/";
-      var requestUrl = pageUrl + longUrl;
+   function getNewURL(longUrl) {
+       var pageUrl = "/new/";
+       var requestUrl = pageUrl + longUrl;
 
-      $.get(requestUrl, function(data) {
-        $("#short-url-output").text(data.shortendUrl);
-      });
-    }
+       $.get(requestUrl, function(data) {
+           $("#short-url-output").text(data.shortendUrl);
+           $("#short-url-output").attr('href', data.shortendUrl);
+           $("#status").text('Now that is convienent');
+       });
+   }
 
-    // listen for enter
-    $("#long-url-input").on('keyup', function (e) {
-      if (e.keyCode == 13) {
-        var url = encodeURIComponent($('#long-url-input').val());
-        getNewURL(url);
-      }
-    });
+   // listen for enter
+   $("#long-url-input").on('keyup', function (e) {
+       if (e.keyCode == 13) {
+           var url = encodeURIComponent($('#long-url-input').val());
+           getNewURL(url);
+       }
+   });
   </script>
 </html>
