@@ -21,7 +21,7 @@ const randomString = (len, bits = 36) => {
 };
 
 const findUrl = (db, url, cb) => (
-  db.collection('urls').find({ number: parseInt(url, 10) }).toArray()
+  db.collection('urls').find({ number: url }).toArray()
     .then((item) => {
       cb(item[0]);
     })
