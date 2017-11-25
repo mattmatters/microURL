@@ -5,7 +5,9 @@ import cors from 'cors';
 import process from 'process';
 
 const publicURL = 'http://kindasmallurl.fun/';
-const mongoURL = process.env.MONGODB_URI ? process.env.MONGODB_URI : 'mongodb://localhost:27017/kindasmallurl';
+const mongoURL = process.env.MONGODB_URI
+  ? process.env.MONGODB_URI
+  : 'mongodb://localhost:27017/kindasmallurl';
 const PORT = process.env.PORT ? process.env.PORT : 3000;
 const app = express();
 
@@ -14,35 +16,44 @@ const randomString = (len, bits = 36) => {
   let newStr;
 
   while (outStr.length < len) {
-    newStr = Math.random().toString(bits).slice(2);
-    outStr += newStr.slice(0, Math.min(newStr.length, (len - outStr.length)));
+    newStr = Math.random()
+      .toString(bits)
+      .slice(2);
+    outStr += newStr.slice(0, Math.min(newStr.length, len - outStr.length));
   }
   return outStr;
 };
 
-const findUrl = (db, url, cb) => (
-  db.collection('urls').find({ number: url }).toArray()
+const findUrl = (db, url, cb) =>
+  db
+    .collection('urls')
+    .find({ number: url })
+    .toArray()
     .then((item) => {
       cb(item[0]);
-    })
-);
+    });
 
 const findEntries = (db, cb) => {
-  db.collection('urls').find().toArray()
+  db
+    .collection('urls')
+    .find()
+    .toArray()
     .then((items) => {
       cb(items);
     });
 };
 
 const insertUrl = (db, url, cb) => {
-  db.collection('urls').insertMany([{
-    number: randomString(80),
-    originalUrl: url,
-  }], (err, result) => {
+  db.collection('urls').insertMany([
+    {
+      number: randomString(80),
+      originalUrl: url,
+    },
+  ],
+  (err, result) => {
     cb(result);
   });
 };
-
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../static/index.html'));
