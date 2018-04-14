@@ -1,5 +1,4 @@
 # [Kinda Small Url](http://kindasmallurl.fun)
-[![pipeline status](https://gitlab.com/mattmatters/microURL/badges/master/pipeline.svg)](https://gitlab.com/mattmatters/microURL/commits/master)
  [![Build Status](https://travis-ci.org/mattmatters/microURL.svg?branch=master)](https://travis-ci.org/mattmatters/microURL)
  [![dependencies Status](https://david-dm.org/mattmatters/microurl/status.svg)](https://david-dm.org/mattmatters/microurl)
 
