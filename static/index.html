@@ -18,10 +18,7 @@
     <meta property="twitter:title" content="Kinda Small Url" />
     <meta property="twitter:description" content="Inconvient url shortening and redirecting." />
     <meta name="application-name" content="Kinda Small Url" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="static/style.css" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110856410-4"></script>
     <script>
      window.dataLayer = window.dataLayer || [];
@@ -34,28 +31,33 @@
       <h1 class="header">Kinda Small Url</h1>
       <div class="input">
           <input id="long-url-input" class="input-url" placeholder="Put url here"></input>
-          <button onClick="getNewURL($('#long-url-input').val())">Go</button>
+          <button onClick="getNewURL()">Go</button>
       </div>
       <a id="short-url-output" class="output-url"></a>
       <h4 id="status">Convenience at its finest.</h4>
   </body>
   <script>
-   function getNewURL(longUrl) {
-       var pageUrl = "/new/";
-       var requestUrl = pageUrl + longUrl;
+   // Send get request to api and display result
+   function getNewURL() {
+       const longUrl = document.getElementById('long-url-input').value;
+       const requestUrl = `/new/${longUrl}`;
 
-       $.get(requestUrl, function(data) {
-           $("#short-url-output").text(data.shortendUrl);
-           $("#short-url-output").attr('href', data.shortendUrl);
-           $("#status").text('Now that is convienent');
-       });
+       fetch(requestUrl).then((resp) => resp.json())
+                        .then((data) => {
+                            let output = document.getElementById('short-url-output');
+                            console.log(data);
+                            output.innerHTML = data.shortendUrl;
+                            output.setAttribute('href', data.shortendUrl);
+
+                            document.getElementById('status').innerHTML = 'Now that is convienent';
+                        });
    }
 
-   // listen for enter
-   $("#long-url-input").on('keyup', function (e) {
+   // On pressing enter
+   document.addEventListener('keypress', (e) => {
        if (e.keyCode == 13) {
-           var url = encodeURIComponent($('#long-url-input').val());
-           getNewURL(url);
+           e.preventDefault();
+           getNewURL();
        }
    });
   </script>
