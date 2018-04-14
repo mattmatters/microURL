@@ -29,55 +29,12 @@
      gtag('js', new Date());
      gtag('config', 'UA-110856410-4');
     </script>
-    <style>
-     @import url('https://fonts.googleapis.com/css?family=Lato|Lemon');
-     .header {
-         margin: 0;
-         padding-top: 1.3em;
-         margin-bottom: .6em;
-         text-align: center;
-         font-size: 6em;
-         font-family: 'Lemon', cursive;
-     }
-     .sub-header {
-         margin-bottom: .8em;
-     }
-     body {
-         text-align: center;
-         font-family: 'Lato', sans-serif;
-     }
-     .input {
-         width: 60%;
-         height: 4em;
-         padding-bottom: .5em;
-         text-align: center;
-         margin: .5em auto;
-     }
-     .input input {
-         width: 80%;
-         height: 100%;
-     }
-     .input button {
-         width: 15%;
-         height: 100%;
-     }
-     .output-url {
-         margin-top: 1.5em;
-     }
-     @media screen and (max-width: 750px) {
-         .input {
-             width: 75%;
-         }
-     }
-    </style>
   </head>
   <body>
       <h1 class="header">Kinda Small Url</h1>
       <div class="input">
           <input id="long-url-input" class="input-url" placeholder="Put url here"></input>
-          <button onClick="getNewURL($('#long-url-input').val())">
-              Go
-          </button>
+          <button onClick="getNewURL($('#long-url-input').val())">Go</button>
       </div>
       <a id="short-url-output" class="output-url"></a>
       <h4 id="status">Convenience at its finest.</h4>

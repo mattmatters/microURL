@@ -9,6 +9,7 @@ const MONGO_URL = process.env.MONGODB_URI || 'mongodb://localhost:27017/kindasma
 const PORT = process.env.PORT || 3000;
 
 const app = express();
+app.use('/static', express.static('static'));
 
 // Db Wrapper
 const connectDb = () => {
