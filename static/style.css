@@ -37,4 +37,7 @@ body {
     .input {
         width: 75%;
     }
+    .header {
+        font-size: 3em;
+    }
 }
