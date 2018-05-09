@@ -4,7 +4,7 @@ const path = require('path');
 const cors = require('cors');
 const process = require('process');
 
-const PUBLIC_URL = process.env.PUBLIC_URL || 'http://kindasmallurl.fun/';
+const PUBLIC_URL = process.env.PUBLIC_URL || 'http://a.kindasmallurl.fun/';
 const MONGO_URL = process.env.MONGODB_URI || 'mongodb://localhost:27017/kindasmallurl';
 const PORT = process.env.PORT || 3000;
 
